@@ -1,0 +1,420 @@
+:root {
+  --sfondo: #04100f;
+  --pannello: #0a1c20;
+  --verde: #19d3a2;
+  --ciano: #22e6ff;
+  --magenta: #ff3cac;
+  --giallo: #ffd84c;
+  --rosso: #ff5566;
+  --testo: #d6f5ef;
+}
+
+body {
+  margin: 0;
+  font-family: "Press Start 2P", "Courier New", monospace;
+  line-height: 1.8;/*altezzq al testo*/
+  color: var(--testo); /*colore al testo*/
+  background-color: var(--sfondo);/*prende variabile sfondo*/
+  background-image:
+    linear-gradient(rgba(25, 211, 162, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(25, 211, 162, 0.05) 1px, transparent 1px); /* per fare lo sfondo quadrettato*/
+  background-size: 32px 32px; /* altezza e grandezza dei quadratini*/
+}
+
+/* ---------- Menu ---------- */
+.menu {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 24px;
+  background: var(--sfondo);
+  border-bottom: 2px solid #123a39;
+}
+
+.logo {
+  font-size: 12px;
+  color: var(--verde);
+  text-decoration: none;
+}
+
+.menu .link {
+  display: flex;
+  gap: 18px;
+}
+
+.menu .link a {
+  font-size: 9px;
+  color: var(--testo);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.menu .link a:hover {
+  color: var(--verde);
+}
+
+/* ---------- Bottoni ---------- */
+.btn {
+  padding: 12px 18px;
+  font-family: inherit;
+  font-size: 10px;
+  color: #04120c;
+  background: var(--verde);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #0f8a69, 0 0 14px rgba(25, 211, 162, 0.5);/*da l'ombra ai pulsanti*/
+  transition: transform 0.4s, box-shadow 1s;/*sfuma la transizione, la rende più bella ed elegante*/
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}/*quando vi sopra con il mouse si sposta in alto*/
+
+.btn:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #0f8a69;
+}/* il pulsante premuto e non è disabilitato si sposta in basso*/
+
+.btn:disabled {
+  color: #556;
+  background: #1c2b30;
+  box-shadow: 0 0  #101a1d;
+  cursor: wait;/*fa apparire il cursore in caricamento*/
+}
+
+.btn-grande {
+  padding: 18px 28px;
+  font-size: 14px;
+}
+
+/* ---------- Hero ---------- */
+#hero {
+  padding: 70px 20px 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.sopratitolo {
+  margin: 0 0 18px;
+  font-size: 10px;
+  color: var(--ciano);
+}
+
+#hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 9vw, 4.6rem);
+  line-height: 1.2;
+  letter-spacing: 6px;
+  color: var(--verde);
+  text-shadow: 0 0 10px var(--verde), 0 0 30px var(--verde), 5px 5px 0 var(--magenta);
+}
+
+.sottotitolo {
+  max-width: 640px;
+  margin: 26px auto 30px;
+  font-size: 11px;
+  color: #a9d8cf;
+}
+
+/* ---------- Stato ---------- */
+.stato {
+  max-width: 560px;
+  margin: 22px auto 0;
+  padding: 10px 14px;
+  font-size: 9px;
+  text-align: left;
+  background: #040f12;
+  border-left: 4px solid #556;
+  border-radius: 4px;
+}
+
+.stato.caricamento { color: var(--giallo); border-color: var(--giallo); }
+.stato.ok          { color: var(--verde);  border-color: var(--verde); }
+.stato.errore      { color: var(--rosso);  border-color: var(--rosso); }
+
+/* ---------- Animazione hero ---------- */
+.pista {
+  position: relative;
+  height: 110px;
+  margin-top: 50px;
+  background: radial-gradient(circle, #ffe08a 3px, transparent 4px) 0 70% / 36px 100% repeat-x;
+}
+
+.corsa {
+  position: absolute;
+  left: 0;
+  bottom: 12px;
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  animation: corsa 9s linear infinite;
+}
+
+@keyframes corsa {
+  from { transform: translateX(-300px); }
+  to   { transform: translateX(100vw); }
+}
+
+.robot-css {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  background: #22e6ff;
+  border-radius: 14px;
+  box-shadow: 0 0 18px #22e6ff;
+  animation: rimbalzo 0.35s ease-in-out infinite alternate;
+}
+
+.robot-css::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 14px;
+  height: 22px;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 70% 50%, #fff 4px, transparent 5px),
+    radial-gradient(circle at 30% 50%, #fff 4px, transparent 5px),
+    #06222b;
+}
+
+.robot-css::after {
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: #ff3cac;
+  box-shadow: 0 6px 0 -2px #22e6ff;
+}
+
+@keyframes rimbalzo {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-6px); }
+}
+
+.virus-css {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  background: var(--c);
+  clip-path: polygon(50% 0%, 61% 18%, 79% 9%, 82% 30%, 100% 35%, 88% 52%, 100% 68%, 80% 72%, 79% 91%, 61% 83%, 50% 100%, 39% 83%, 21% 91%, 20% 72%, 0% 68%, 12% 52%, 0% 35%, 18% 30%, 21% 9%, 39% 18%);
+  animation: pulsa 0.5s ease-in-out infinite alternate;
+}
+
+.virus-css::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 72% 50%, #120418 5px, #fff 6px);
+}
+
+.virus-css.piccolo {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 10px;
+}
+
+@keyframes pulsa {
+  from { transform: scale(0.94); }
+  to   { transform: scale(1.06); }
+}
+
+/* ---------- Sezioni ---------- */
+.sezione {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 70px 20px 10px;
+}
+
+.sezione h2 {
+  margin: 0 0 18px;
+  font-size: 18px;
+  color: var(--giallo);
+  text-shadow: 0 0 10px rgba(255, 216, 76, 0.6);
+}
+
+.intro {
+  max-width: 720px;
+  margin: 0 0 28px;
+  font-size: 10px;
+  color: #a9d8cf;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  padding: 20px;
+  background: var(--pannello);
+  border: 2px solid #1d5a58;
+  border-radius: 10px;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--verde);
+  box-shadow: 0 0 20px rgba(25, 211, 162, 0.3);
+}
+
+.card h3 {
+  margin: 0 0 12px;
+  font-size: 12px;
+  color: var(--ciano);
+}
+
+.card p {
+  margin: 0;
+  font-size: 9px;
+  color: #bfe3dc;
+}
+
+/* ---------- Comandi ---------- */
+.tasti {
+  text-align: center;
+}
+
+.tasto-riga {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+kbd {
+  min-width: 34px;
+  padding: 8px 8px;
+  font-family: inherit;
+  font-size: 11px;
+  color: var(--testo);
+  background: #143036;
+  border: 2px solid #2b6a68;
+  border-bottom-width: 5px;
+  border-radius: 6px;
+}
+
+/* ---------- Virus ---------- */
+.virus-card {
+  text-align: center;
+  cursor: pointer;
+}
+
+.virus-card.attivo {
+  border-color: var(--giallo);
+  box-shadow: 0 0 20px rgba(255, 216, 76, 0.35);
+}
+
+.info-box {
+  margin: 22px 0 0;
+  padding: 16px;
+  min-height: 70px;
+  font-size: 10px;
+  color: var(--testo);
+  background: #0a1c20;
+  border: 2px dashed #2b6a68;
+  border-radius: 8px;
+}
+
+/* ---------- Codice ---------- */
+.codice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+pre {
+  margin: 0;
+  padding: 18px;
+  overflow-x: auto;
+  font-size: 10px;
+  line-height: 1.7;
+  color: #b9f3de;
+  background: #030a0b;
+  border: 2px solid #1d5a58;
+  border-radius: 8px;
+}
+
+pre code {
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+}
+
+.spiegazione h3 {
+  margin: 0 0 10px;
+  font-size: 11px;
+  color: var(--ciano);
+}
+
+.spiegazione p {
+  margin: 0 0 18px;
+  font-size: 9px;
+  color: #bfe3dc;
+}
+
+.spiegazione code {
+  color: var(--giallo);
+}
+
+/* ---------- Classifica ---------- */
+.top-lista {
+  max-width: 560px;
+  margin: 22px 0 0;
+  padding: 0 0 0 28px;
+  font-size: 11px;
+}
+
+.top-lista li {
+  padding: 10px 6px;
+  border-bottom: 1px dashed #1d5a58;
+}
+
+.top-lista li:first-child {
+  color: var(--giallo);
+}
+
+/* ---------- Team ---------- */
+.persona {
+  text-align: center;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 14px;
+  font-size: 22px;
+  line-height: 64px;
+  color: #04120c;
+  background: linear-gradient(135deg, var(--ciano), var(--verde));
+  border-radius: 14px;
+}
+
+.finale {
+  text-align: center;
+  padding-bottom: 60px;
+}
+
+footer {
+  padding: 24px 10px 40px;
+  text-align: center;
+  font-size: 9px;
+  color: #5b8a83;
+  border-top: 2px solid #123a39;
+}

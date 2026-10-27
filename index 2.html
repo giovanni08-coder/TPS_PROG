@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circuit Chase - Progetto TPS Arcade Games</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <nav class="menu">
+    <a class="logo" href="#hero">CIRCUIT CHASE</a>
+    <div class="link">
+      <a href="#gioco">Il gioco</a>
+      <a href="#comandi">Comandi</a>
+      <a href="#virus">Virus</a>
+      <a href="#classifica">Classifica</a>
+      <a href="#team">Team</a>
+    </div>
+    <button class="btn" id="id">Gioca</button>
+    <script>document.getElementById("id").disabled = true;</script>
+  </nav>
+
+
+
+  <header id="hero">
+    <p class="sopratitolo">Progetto TPS Arcade Games - 5AI</p>
+    <h1>CIRCUIT<br>CHASE</h1>
+    <p class="sottotitolo">Raccogli tutti i chip del circuito, schiva i virus e usa le batterie per ribaltare la sfida.</p>
+    <button class="btn btn-grande btn-gioca">&#9654; Gioca ora</button>
+    <p id="stato-sito" class="stato">Premi il pulsante oppure il tasto G per iniziare.</p>
+
+    <div class="pista" aria-hidden="true">
+      <div class="corsa">
+        <div class="virus-css" style="--c:#ff4d6d"></div>
+        <div class="virus-css" style="--c:#ff9f1c"></div>
+        <div class="robot-css"></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section id="gioco" class="sezione reveal">
+      <h2>Il gioco</h2>
+      <p class="intro">Un gioco arcade di labirinto: guidi un piccolo robot in un circuito pieno di chip da raccogliere. Ma il circuito è infestato da virus che ti danno la caccia.</p>
+      <div class="griglia">
+        <article class="card">
+          <h3>Obiettivo</h3>
+          <p>Raccogli tutti i chip per vincere. Ogni chip vale 10 punti, ogni batteria 50. Le vite rimaste a fine partita danno un bonus.</p>
+        </article>
+        <article class="card">
+          <h3>Batterie</h3>
+          <p>Con una batteria i virus diventano blu e rallentano: per qualche secondo puoi catturarli e guadagnare 200 punti.</p>
+        </article>
+        <article class="card">
+          <h3>Difficoltà</h3>
+          <p>Facile, normale o difficile: cambiano la velocità dei virus, quanto ti inseguono e la durata delle batterie.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Comandi -->
+    <section id="comandi" class="sezione reveal">
+      <h2>Comandi</h2>
+      <div class="griglia">
+        <article class="card tasti">
+          <div class="tasto-riga"><kbd>&uarr;</kbd><kbd>&larr;</kbd><kbd>&darr;</kbd><kbd>&rarr;</kbd></div>
+          <p>Muovi il robot con le frecce</p>
+        </article>
+        <article class="card tasti">
+          <div class="tasto-riga"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div>
+          <p>Oppure con W A S D</p>
+        </article>
+        <article class="card tasti">
+          <div class="tasto-riga"><kbd>P</kbd></div>
+          <p>Pausa e ripresa</p>
+        </article>
+        <article class="card tasti">
+          <div class="tasto-riga"><kbd>G</kbd></div>
+          <p>Da questo sito: apre il gioco</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Virus -->
+    <section id="virus" class="sezione reveal">
+      <h2>Conosci i virus</h2>
+      <p class="intro">Passa il mouse (o tocca) su un virus per scoprire come si comporta.</p>
+      <div class="griglia virus-griglia">
+        <article class="card virus-card" data-virus="rosso">
+          <div class="virus-css piccolo" style="--c:#ff4d6d"></div>
+          <h3>Rosso</h3>
+        </article>
+        <article class="card virus-card" data-virus="arancio">
+          <div class="virus-css piccolo" style="--c:#ff9f1c"></div>
+          <h3>Arancio</h3>
+        </article>
+        <article class="card virus-card" data-virus="viola">
+          <div class="virus-css piccolo" style="--c:#b967ff"></div>
+          <h3>Viola</h3>
+        </article>
+        <article class="card virus-card" data-virus="verde">
+          <div class="virus-css piccolo" style="--c:#2ee6a6"></div>
+          <h3>Verde</h3>
+        </article>
+      </div>
+      <p id="info-virus" class="info-box">Seleziona un virus per leggere la sua descrizione.</p>
+    </section>
+
+
+
+    <section id="classifica" class="sezione reveal">
+      <h2>Classifica</h2>
+      <p id="stato-top" class="stato">In attesa...</p>
+      <ol id="top-lista" class="top-lista"></ol>
+    </section>
+
+    <!-- Team -->
+    <section id="team" class="sezione reveal">
+      <h2>Il team</h2>
+      <div class="griglia">
+        <article class="card persona">
+          <div class="avatar">1</div>
+          <h3>Nome Cognome</h3>
+          <p>Ruolo</p>
+        </article>
+        <article class="card persona">
+          <div class="avatar">2</div>
+          <h3>Nome Cognome</h3>
+          <p>Ruolo</p>
+        </article>
+        <article class="card persona">
+          <div class="avatar">3</div>
+          <h3>Nome Cognome</h3>
+          <p>Ruolo</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="sezione finale reveal">
+      <h2>Pronto a sfidare i virus?</h2>
+      <button class="btn btn-grande btn-gioca">&#9654; Gioca ora</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>Creator: Ferrari Giovanni Battista, Gallizioli Davide, Azzolari Emilio</p>
+  </footer>
+
+  <script src="site.js"></script>
+</body>
+</html>
