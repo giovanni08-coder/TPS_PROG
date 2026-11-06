@@ -1,0 +1,109 @@
+/* ---------- Animazione hero ---------- */
+CCS
+
+.pista {
+  position: relative;
+  height: 110px;
+  margin-top: 50px;
+  background: radial-gradient(circle, #ffe08a 3px, transparent 4px) 0 70% / 36px 100% repeat-x;
+}
+
+.corsa {
+  position: absolute;
+  left: 0;
+  bottom: 12px;
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  animation: corsa 9s linear infinite;
+}
+
+@keyframes corsa {
+  from { transform: translateX(-300px); }
+  to   { transform: translateX(100vw); }
+}
+
+.robot-css {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  background: #22e6ff;
+  border-radius: 14px;
+  box-shadow: 0 0 18px #22e6ff;
+  animation: rimbalzo 0.35s ease-in-out infinite alternate;
+}
+
+.robot-css::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 14px;
+  height: 22px;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 70% 50%, #fff 4px, transparent 5px),
+    radial-gradient(circle at 30% 50%, #fff 4px, transparent 5px),
+    #06222b;
+}
+
+.robot-css::after {
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: #ff3cac;
+  box-shadow: 0 6px 0 -2px #22e6ff;
+}
+
+@keyframes rimbalzo {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-6px); }
+}
+
+.virus-css {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  background: var(--c);
+  clip-path: polygon(50% 0%, 61% 18%, 79% 9%, 82% 30%, 100% 35%, 88% 52%, 100% 68%, 80% 72%, 79% 91%, 61% 83%, 50% 100%, 39% 83%, 21% 91%, 20% 72%, 0% 68%, 12% 52%, 0% 35%, 18% 30%, 21% 9%, 39% 18%);
+  animation: pulsa 0.5s ease-in-out infinite alternate;
+}
+
+.virus-css::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 72% 50%, #120418 5px, #fff 6px);
+}
+
+.virus-css.piccolo {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 10px;
+}
+
+@keyframes pulsa {
+  from { transform: scale(0.94); }
+  to   { transform: scale(1.06); }
+}
+
+HTML
+
+<div class="pista" aria-hidden="true">
+      <div class="corsa">
+        <div class="virus-css" style="--c:#ff4d6d"></div>
+        <div class="virus-css" style="--c:#ff9f1c"></div>
+        <div class="robot-css"></div>
+      </div>
+    </div>
+

@@ -12,7 +12,7 @@
 body {
   margin: 0;
   font-family: "Press Start 2P", "Courier New", monospace;
-  line-height: 1.8;/*altezzq al testo*/
+  line-height: 1.8;/*altezza al testo*/
   color: var(--testo); /*colore al testo*/
   background-color: var(--sfondo);/*prende variabile sfondo*/
   background-image:
@@ -49,7 +49,7 @@ body {
   font-size: 9px;
   color: var(--testo);
   text-decoration: none;
-  transition: color 0.15s;
+  transition: color 0.15s;/*se il colore cambia esso lo fa più gradualmente, in modo più sfumato*/
 }
 
 .menu .link a:hover {
@@ -106,7 +106,7 @@ body {
 
 #hero h1 {
   margin: 0;
-  font-size: clamp(2rem, 9vw, 4.6rem);
+  font-size: clamp(32px, 320px,73px);/* clamp serve per dare font massimo, minimo e preferito*/
   line-height: 1.2;
   letter-spacing: 6px;
   color: var(--verde);
@@ -114,7 +114,6 @@ body {
 }
 
 .sottotitolo {
-  max-width: 640px;
   margin: 26px auto 30px;
   font-size: 11px;
   color: #a9d8cf;
@@ -122,8 +121,8 @@ body {
 
 /* ---------- Stato ---------- */
 .stato {
-  max-width: 560px;
-  margin: 22px auto 0;
+  max-width: 560px; /*da larghezza massima all'elemento*/
+  margin: 40px auto 0;/*dato che l'elemento ha una grandezza massimo il dom divide due lo spazio mancante mettendo in mezzo agli spazi mancanti*/
   padding: 10px 14px;
   font-size: 9px;
   text-align: left;
@@ -136,108 +135,13 @@ body {
 .stato.ok          { color: var(--verde);  border-color: var(--verde); }
 .stato.errore      { color: var(--rosso);  border-color: var(--rosso); }
 
-/* ---------- Animazione hero ---------- */
-.pista {
-  position: relative;
-  height: 110px;
-  margin-top: 50px;
-  background: radial-gradient(circle, #ffe08a 3px, transparent 4px) 0 70% / 36px 100% repeat-x;
-}
 
-.corsa {
-  position: absolute;
-  left: 0;
-  bottom: 12px;
-  display: flex;
-  align-items: flex-end;
-  gap: 20px;
-  animation: corsa 9s linear infinite;
-}
-
-@keyframes corsa {
-  from { transform: translateX(-300px); }
-  to   { transform: translateX(100vw); }
-}
-
-.robot-css {
-  position: relative;
-  width: 54px;
-  height: 54px;
-  background: #22e6ff;
-  border-radius: 14px;
-  box-shadow: 0 0 18px #22e6ff;
-  animation: rimbalzo 0.35s ease-in-out infinite alternate;
-}
-
-.robot-css::before {
-  content: "";
-  position: absolute;
-  left: 6px;
-  right: 6px;
-  top: 14px;
-  height: 22px;
-  border-radius: 8px;
-  background:
-    radial-gradient(circle at 70% 50%, #fff 4px, transparent 5px),
-    radial-gradient(circle at 30% 50%, #fff 4px, transparent 5px),
-    #06222b;
-}
-
-.robot-css::after {
-  content: "";
-  position: absolute;
-  top: -14px;
-  left: 50%;
-  width: 8px;
-  height: 8px;
-  margin-left: -4px;
-  border-radius: 50%;
-  background: #ff3cac;
-  box-shadow: 0 6px 0 -2px #22e6ff;
-}
-
-@keyframes rimbalzo {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-6px); }
-}
-
-.virus-css {
-  position: relative;
-  width: 56px;
-  height: 56px;
-  background: var(--c);
-  clip-path: polygon(50% 0%, 61% 18%, 79% 9%, 82% 30%, 100% 35%, 88% 52%, 100% 68%, 80% 72%, 79% 91%, 61% 83%, 50% 100%, 39% 83%, 21% 91%, 20% 72%, 0% 68%, 12% 52%, 0% 35%, 18% 30%, 21% 9%, 39% 18%);
-  animation: pulsa 0.5s ease-in-out infinite alternate;
-}
-
-.virus-css::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 24px;
-  height: 24px;
-  margin: -12px 0 0 -12px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 72% 50%, #120418 5px, #fff 6px);
-}
-
-.virus-css.piccolo {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 10px;
-}
-
-@keyframes pulsa {
-  from { transform: scale(0.94); }
-  to   { transform: scale(1.06); }
-}
 
 /* ---------- Sezioni ---------- */
 .sezione {
   max-width: 1000px;
-  margin: 0 auto;
-  padding: 70px 20px 10px;
+  margin: 0 auto;/*stessa cosa fatta prima*/
+  padding: 70px 20px 30px;
 }
 
 .sezione h2 {
@@ -248,15 +152,20 @@ body {
 }
 
 .intro {
-  max-width: 720px;
+  max-width: 1000px;
   margin: 0 0 28px;
   font-size: 10px;
   color: #a9d8cf;
 }
 
 .griglia {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  display: flex;
+  gap: 18px;
+}
+
+.virus-griglia {
+  display: flex;
+  justify-content: space-between;
   gap: 18px;
 }
 
@@ -334,8 +243,7 @@ kbd {
 
 /* ---------- Codice ---------- */
 .codice-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
   gap: 20px;
   align-items: start;
 }
@@ -395,16 +303,6 @@ pre code {
   text-align: center;
 }
 
-.avatar {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 14px;
-  font-size: 22px;
-  line-height: 64px;
-  color: #04120c;
-  background: linear-gradient(135deg, var(--ciano), var(--verde));
-  border-radius: 14px;
-}
 
 .finale {
   text-align: center;
