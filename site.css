@@ -224,11 +224,24 @@ kbd {
 .virus-card {
   text-align: center;
   cursor: pointer;
+  max-height: 120px;
 }
 
 .virus-card.attivo {
   border-color: var(--giallo);
   box-shadow: 0 0 20px rgba(255, 216, 76, 0.35);
+}
+.virus-card .rosso img{
+    max-width: 100px;
+}
+.virus-card .arancio img{
+    max-width: 100px;
+}
+.virus-card .viola img{
+    max-width: 100px;
+}
+.virus-card .verde img{
+    max-width: 100px;
 }
 .virus-card .rosso h3{
     color:var(--rosso);
