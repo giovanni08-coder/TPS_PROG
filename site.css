@@ -163,11 +163,6 @@ body {
   gap: 18px;
 }
 
-.virus-griglia {
-  display: flex;
-  justify-content: space-between;
-  gap: 18px;
-}
 
 .card {
   padding: 20px;
@@ -190,7 +185,6 @@ body {
 }
 
 .card p {
-  margin: 0;
   font-size: 9px;
   color: #bfe3dc;
 }
@@ -208,7 +202,7 @@ body {
 }
 
 kbd {
-  min-width: 34px;
+  min-width: 34px;/*da una largfhezza minima se troppo piccoli*/
   padding: 8px 8px;
   font-family: inherit;
   font-size: 11px;
@@ -220,6 +214,13 @@ kbd {
 }
 
 /* ---------- Virus ---------- */
+
+.virus-griglia {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+}
+
 .virus-card {
   text-align: center;
   cursor: pointer;
@@ -228,6 +229,19 @@ kbd {
 .virus-card.attivo {
   border-color: var(--giallo);
   box-shadow: 0 0 20px rgba(255, 216, 76, 0.35);
+}
+.virus-card .rosso h3{
+    color:var(--rosso);
+}
+
+.virus-card .arancio h3{
+    color:var(--giallo);
+}
+.virus-card .viola h3{
+    color:var(--magenta);
+}
+.virus-card .verde h3{
+    color:var(--verde);
 }
 
 .info-box {
@@ -239,46 +253,6 @@ kbd {
   background: #0a1c20;
   border: 2px dashed #2b6a68;
   border-radius: 8px;
-}
-
-/* ---------- Codice ---------- */
-.codice-grid {
-  display: flex;
-  gap: 20px;
-  align-items: start;
-}
-
-pre {
-  margin: 0;
-  padding: 18px;
-  overflow-x: auto;
-  font-size: 10px;
-  line-height: 1.7;
-  color: #b9f3de;
-  background: #030a0b;
-  border: 2px solid #1d5a58;
-  border-radius: 8px;
-}
-
-pre code {
-  font-family: "Courier New", monospace;
-  font-size: 12px;
-}
-
-.spiegazione h3 {
-  margin: 0 0 10px;
-  font-size: 11px;
-  color: var(--ciano);
-}
-
-.spiegazione p {
-  margin: 0 0 18px;
-  font-size: 9px;
-  color: #bfe3dc;
-}
-
-.spiegazione code {
-  color: var(--giallo);
 }
 
 /* ---------- Classifica ---------- */
@@ -297,16 +271,11 @@ pre code {
 .top-lista li:first-child {
   color: var(--giallo);
 }
-
-/* ---------- Team ---------- */
-.persona {
-  text-align: center;
+.top-lista li:nth-child(2) {
+    color: #BCC6CC;
 }
-
-
-.finale {
-  text-align: center;
-  padding-bottom: 60px;
+.top-lista li:nth-child(3) {
+     color: #CD7F32;
 }
 
 footer {

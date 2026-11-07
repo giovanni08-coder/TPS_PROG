@@ -31,7 +31,7 @@
 
   <main>
 
-    <section id="gioco" class="sezione reveal">
+    <section id="gioco" class="sezione">
       <h2>Il gioco</h2>
       <p class="intro">Un gioco arcade di labirinto: guidi un piccolo robot in un circuito pieno di chip da raccogliere. Ma il circuito è infestato da virus che ti danno la caccia.</p>
       <div class="griglia">
@@ -74,25 +74,29 @@
     </section>
 
     <!-- Virus -->
-    <section id="virus" class="sezione reveal">
+    <section id="virus" class="sezione">
       <h2>Conosci i virus</h2>
       <p class="intro">Passa il mouse (o tocca) su un virus per scoprire come si comporta.</p>
-      <div class="griglia virus-griglia">
-        <article class="card virus-card" data-virus="rosso">
-          <div class="virus-css piccolo" style="--c:#ff4d6d"></div>
-          <h3>Rosso</h3>
+      <div class="virus-griglia">
+        <article class="card virus-card">
+          <div class="rosso">
+            <h3>Rosso</h3>
+          </div>
         </article>
-        <article class="card virus-card" data-virus="arancio">
-          <div class="virus-css piccolo" style="--c:#ff9f1c"></div>
+        <article class="card virus-card">
+          <div class="arancio">
           <h3>Arancio</h3>
+          </div>
         </article>
-        <article class="card virus-card" data-virus="viola">
-          <div class="virus-css piccolo" style="--c:#b967ff"></div>
+        <article class="card virus-card">
+          <div class="viola">
           <h3>Viola</h3>
+          </div>
         </article>
-        <article class="card virus-card" data-virus="verde">
-          <div class="virus-css piccolo" style="--c:#2ee6a6"></div>
+        <article class="card virus-card">
+          <div class="verde">
           <h3>Verde</h3>
+          </div>
         </article>
       </div>
       <p id="info-virus" class="info-box">Seleziona un virus per leggere la sua descrizione.</p>
@@ -109,7 +113,7 @@
 
     <section class="sezione">
       <h2>Pronto a sfidare i virus?</h2>
-      <button class="btn btn-grande btn-gioca">&#9654; Gioca ora</button>
+      <button class="btn btn-grande">&#9654; Gioca ora</button>
     </section>
   </main>
 
