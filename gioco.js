@@ -26,7 +26,7 @@ const mostri = [
 ];
 
 const player = [ 1, 1]; // Coordinate iniziali del giocatore (x, y)];
-let chipsRemaining = 0;
+let MoneteRimanenti = 0;
 let punteggio =0;
 const punteggioElemento = document.getElementById("punteggio");
 const celleVuote = [];
@@ -90,7 +90,7 @@ function SpawnaMonete(){
     const imgCoin = document.createElement("img");
     imgCoin.src = "sprite_gioco/coin.png";
     cellaTarget.appendChild(imgCoin);
-    chipsRemaining += 1;
+    MoneteRimanenti += 1;
   }
 }
 }
@@ -122,8 +122,25 @@ function muoviGiocatore(x, y) {
       cellaNuova[0].removeChild(imgCoin);
       punteggio +=1;
       punteggioElemento.textContent = punteggio;
-      chipsRemaining -= 1;
-      if(chipsRemaining===0){
+      MoneteRimanenti -= 1;
+      
+      //pezzo di codice per ridare la cella vuota al array delle celle vuote
+      //controlla se la celle è già presente nell'array delle celle vuote, se non lo è la aggiunge
+      const coordinataAttuale = [player[1], player[0]];
+      let giaPresente = false;
+      for (let k = 0; k < celleVuote.length; k++) {
+        if (celleVuote[k][0] === coordinataAttuale[0] && celleVuote[k][1] === coordinataAttuale[1]) {
+          giaPresente = true;
+          break; 
+        }
+      }
+      if (!giaPresente) {
+        celleVuote.push(coordinataAttuale);
+      }
+      
+
+
+      if(MoneteRimanenti===0){
         SpawnaMonete();
       }
     }
