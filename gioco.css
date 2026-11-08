@@ -111,3 +111,13 @@ body {
   box-shadow: 0 0  #101a1d;
   cursor: wait;/*fa apparire il cursore in caricamento*/
 }
+
+.info-box {
+  margin: 22px 0 0;
+  padding: 16px;
+  font-size: 14px;
+  color: var(--testo);
+  background: #0a1c20;
+  border: 2px dashed #2b6a68;
+  border-radius: 8px;
+}

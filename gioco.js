@@ -5,6 +5,7 @@ const Gioca = document.querySelector("#gioca");
 const statoSito = document.querySelector("#stato-gioco");
 statoSito.textContent = "Caricamento del gioco in corso...";
 statoSito.classList.add("caricamento");
+console.log(localStorage.getItem("classifica"));
 
 
 const map = [
@@ -132,13 +133,33 @@ function SpawnaMonete() {
 }
 SpawnaMonete();
 
+async function salvaPunteggio(nome, punteggio) {
+    let classifica = JSON.parse(
+        localStorage.getItem("classifica")
+    ) || [];
+
+    classifica.push({
+        nome,
+        punteggio
+    });
+
+    localStorage.setItem(
+        "classifica",
+        JSON.stringify(classifica)
+    );
+}
 
 Gioca.addEventListener("click", () => {
+  if (document.querySelector(".info-box").value.trim() === "") {
+    alert("Per favore, inserisci il tuo nikname prima di giocare.");
+    return;
+  }
+  const nomeGiocatore = document.querySelector(".info-box").value.trim();
   document.querySelector("#gioca").disabled = true;
   statoSito.textContent = "Gioco in corso...";
   statoSito.classList.remove("caricamento");
   statoSito.classList.add("ok");
-function muoviGiocatore(x, y) {
+async function muoviGiocatore(x, y) {
   const nuovaX = player[0] + x;
   const nuovaY = player[1] + y;
 
@@ -163,6 +184,7 @@ function muoviGiocatore(x, y) {
     const cellaNuova = trovaCella(player[0], player[1]);
 
     if (colpitoMostro) {
+      await salvaPunteggio(nomeGiocatore, punteggio);
       alert("Game Over! Un mostro ti ha preso!");
       location.reload();
       return;
@@ -221,7 +243,7 @@ document.addEventListener("keydown", function(event) {
   }
 });
 
-function muoviVirus() {
+async function muoviVirus() {
   const direzioni = [
     [1, 0],
     [-1, 0],
@@ -291,6 +313,7 @@ function muoviVirus() {
           cellaGiocatore[0].removeChild(imgRobot);
         }
       }
+      await salvaPunteggio(nomeGiocatore, punteggio);
       alert("Game Over! Un mostro ti ha preso!");
       location.reload();
     }
