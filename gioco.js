@@ -77,22 +77,51 @@ for (let righe = 0; righe < map.length; righe++) {
     board.appendChild(cell);
   }
 }
-function SpawnaMonete(){
-  for (let i = 0; i < 40; i++) {
-  const indiceAcaso = Math.floor(Math.random() * celleVuote.length);
-  const coordinata = celleVuote.splice(indiceAcaso, 1)[0];
-  
-  let Cella = null;
-  Cella = trovaCella(coordinata[1], coordinata[0]); /*coordinata[1] è x, coordinata[0] è y */
-  
-  if (Cella !== null) {
-    const cellaTarget = Cella[0];/*cella[0] è il div corrispondente */
-    const imgCoin = document.createElement("img");
-    imgCoin.src = "sprite_gioco/coin.png";
-    cellaTarget.appendChild(imgCoin);
-    MoneteRimanenti += 1;
+function SpawnaMonete() {
+  // 1. Ripopoliamo l'array celleVuote scansionando tutta la mappa
+  celleVuote.length = 0; // Svuotiamo l'array esistente
+
+  for (let r = 0; r < map.length; r++) {
+    for (let c = 0; c < map[r].length; c++) {
+      // Se non è un muro (#), consideriamo la cella potenzialmente vuota
+      if (map[r][c] !== "#") {
+        // Controlliamo che non ci sia il giocatore
+        let occupata = (player[0] === c && player[1] === r);
+        
+        // Controlliamo che non ci sia un mostro
+        for (let i = 0; i < mostri.length; i++) {
+          if (mostri[i].x === c && mostri[i].y === r) {
+            occupata = true;
+            break;
+          }
+        }
+
+        // Se la cella è libera da giocatore e mostri, la aggiungiamo alle celle vuote
+        if (!occupata) {
+          celleVuote.push([r, c]); // [righe, parola] -> [y, x]
+        }
+      }
+    }
   }
-}
+
+  // 2. Ora peschiamo in sicurezza le 40 monete
+  MoneteRimanenti = 0; // Reset contatore
+  const quanteMonete = Math.min(40, celleVuote.length); // Sicurezza se le celle libere sono meno di 40
+
+  for (let i = 0; i < quanteMonete; i++) {
+    const indiceAcaso = Math.floor(Math.random() * celleVuote.length);
+    const coordinata = celleVuote.splice(indiceAcaso, 1)[0];
+    
+    let Cella = trovaCella(coordinata[1], coordinata[0]); /* coordinata[1] è x, coordinata[0] è y */
+    
+    if (Cella !== null) {
+      const cellaTarget = Cella[0]; /* cella[0] è il div corrispondente */
+      const imgCoin = document.createElement("img");
+      imgCoin.src = "sprite_gioco/coin.png";
+      cellaTarget.appendChild(imgCoin);
+      MoneteRimanenti += 1;
+    }
+  }
 }
 SpawnaMonete();
 
@@ -104,8 +133,14 @@ function muoviGiocatore(x, y) {
   const nuovaY = player[1] + y;
 
   if (map[nuovaY][nuovaX] !== "#") {
-    
-    
+    let colpitoMostro = false;
+    for (let i = 0; i < mostri.length; i++) {
+      if (mostri[i].x === nuovaX && mostri[i].y === nuovaY) {
+        colpitoMostro = true;
+        break;
+      }
+    }
+
     const cellaVecchia = trovaCella(player[0], player[1]);
     const imgRobot = cellaVecchia[0].querySelector("img"); 
     if (imgRobot) {
@@ -117,15 +152,19 @@ function muoviGiocatore(x, y) {
 
     const cellaNuova = trovaCella(player[0], player[1]);
 
+    if (colpitoMostro) {
+      alert("Game Over! Un mostro ti ha preso!");
+      location.reload();
+      return;
+    }
+
     const imgCoin = cellaNuova[0].querySelector("img");
-    if (imgCoin!==null && imgCoin.src.includes("coin.png")) {
+    if (imgCoin !== null && imgCoin.src.includes("coin.png")) {
       cellaNuova[0].removeChild(imgCoin);
-      punteggio +=1;
+      punteggio += 1;
       punteggioElemento.textContent = punteggio;
       MoneteRimanenti -= 1;
       
-      //pezzo di codice per ridare la cella vuota al array delle celle vuote
-      //controlla se la celle è già presente nell'array delle celle vuote, se non lo è la aggiunge
       const coordinataAttuale = [player[1], player[0]];
       let giaPresente = false;
       for (let k = 0; k < celleVuote.length; k++) {
@@ -137,10 +176,8 @@ function muoviGiocatore(x, y) {
       if (!giaPresente) {
         celleVuote.push(coordinataAttuale);
       }
-      
 
-
-      if(MoneteRimanenti===0){
+      if (MoneteRimanenti === 0) {
         SpawnaMonete();
       }
     }
@@ -152,20 +189,106 @@ function muoviGiocatore(x, y) {
 }
 
 document.addEventListener("keydown", function(event) {
-  if (event.key === "ArrowRight") {
+  if (event.key === "ArrowRight" || event.key === "d" || event.key === "D") {
+    event.preventDefault();
     muoviGiocatore(1, 0);
     }
-  if (event.key === "ArrowLeft") {
+  if (event.key === "ArrowLeft" || event.key === "a" || event.key === "A") {
+    event.preventDefault();
     muoviGiocatore(-1, 0);
   }
-  if (event.key === "ArrowUp") {
-    muoviGiocatore(0, -1);
+  if (event.key === "ArrowUp" || event.key === "w" || event.key === "W") {
+    event.preventDefault();
+    muoviGiocatore(0, -1);  
   }
-  if (event.key === "ArrowDown") {
+  if (event.key === "ArrowDown" || event.key=== "s" || event.key === "S") {
+    event.preventDefault();
     muoviGiocatore(0, 1);
+  }
+  if (event.key === "P" || event.key === "p") {
+    event.preventDefault();
+    alert("Pausa attivata. Premi OK per continuare.");
   }
 });
 
+function muoviVirus() {
+  const direzioni = [
+    [1, 0],
+    [-1, 0],
+    [0, -1],
+    [0, 1]
+  ];
+
+  for (let i = 0; i < mostri.length; i++) {
+    const mostro = mostri[i];
+    const dirCasuale = direzioni[Math.floor(Math.random() * direzioni.length)];
+    
+    const nuovaX = mostro.x + dirCasuale[0];
+    const nuovaY = mostro.y + dirCasuale[1];
+
+    if (map[nuovaY][nuovaX] !== "#") {
+      let cellaOccupataDaAltroMostro = false;
+      for (let k = 0; k < mostri.length; k++) {
+        if (mostri[k].x === nuovaX && mostri[k].y === nuovaY) {
+          cellaOccupataDaAltroMostro = true;
+          break;
+        }
+      }
+
+     if (!cellaOccupataDaAltroMostro) {
+        const cellaVecchia = trovaCella(mostro.x, mostro.y);
+        if (cellaVecchia !== null) {
+          const imgMostro = cellaVecchia[0].querySelector("img");
+          if (imgMostro) {
+            cellaVecchia[0].removeChild(imgMostro);
+          }
+
+          if (mostro.AvevaMonetaSotto) {
+            const imgCoin = document.createElement("img");
+            imgCoin.src = "sprite_gioco/coin.png";
+            cellaVecchia[0].appendChild(imgCoin);
+            mostro.AvevaMonetaSotto = false;
+          }
+        }
+
+        mostro.x = nuovaX;
+        mostro.y = nuovaY;
+
+        const cellaNuova = trovaCella(mostro.x, mostro.y);
+        if (cellaNuova !== null) {
+          const immaginiNuove = cellaNuova[0].querySelectorAll("img");
+          for (let j = 0; j < immaginiNuove.length; j++) {
+            if (immaginiNuove[j].src.includes("coin.png")) {
+              cellaNuova[0].removeChild(immaginiNuove[j]);
+              mostro.AvevaMonetaSotto = true;//haMonetaSotto viene inizializzata qui ed è un'attributo dinamico dell'oggetto mostro, che indica se il mostro ha una moneta sotto di lui
+              //più che ha una moneta sotto sarebbe aveva una moneta sotto
+              break;
+            }
+          }
+
+          const nuovoImgMostro = document.createElement("img");
+          nuovoImgMostro.src = mostro.src;
+          cellaNuova[0].appendChild(nuovoImgMostro);
+        }
+      }
+    }
+
+    if (mostro.x === player[0] && mostro.y === player[1]) {
+      const cellaGiocatore = trovaCella(player[0], player[1]);
+      if (cellaGiocatore !== null) {
+        const imgRobot = cellaGiocatore[0].querySelector("img");
+        if (imgRobot) {
+          cellaGiocatore[0].removeChild(imgRobot);
+        }
+      }
+
+      alert("Game Over! Un mostro ti ha preso!");
+      location.reload();
+    }
+  }
+}
+
+setInterval(muoviVirus, 500);//muove i mostri ogni 500 millisecondi, esegue la funzione muoviVirus ogni 500 millisecondi
 
 
 TornaAlSito.forEach((btn) => {
@@ -175,4 +298,4 @@ TornaAlSito.forEach((btn) => {
     statoSito.classList.add("caricamento");
   });
 });
-document.body.style.userSelect = "none";
+document.body.style.userSelect = "none";//non permette di selezionare il testo della pagina
