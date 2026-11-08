@@ -95,7 +95,6 @@ body {
 #hero {
   padding: 70px 20px 0;
   text-align: center;
-  overflow: hidden;
 }
 
 .sopratitolo {
@@ -298,3 +297,4 @@ footer {
   color: #5b8a83;
   border-top: 2px solid #123a39;
 }
+

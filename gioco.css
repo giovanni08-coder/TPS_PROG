@@ -1,0 +1,110 @@
+:root {
+  --sfondo: #04100f;
+  --pannello: #0a1c20;
+  --verde: #19d3a2;
+  --ciano: #22e6ff;
+  --magenta: #ff3cac;
+  --giallo: #ffd84c;
+  --rosso: #ff5566;
+  --testo: #d6f5ef;
+}
+
+body {
+  margin: 0;
+  font-family: "Press Start 2P", "Courier New", monospace;
+  line-height: 1.8;/*altezza al testo*/
+  color: var(--testo); /*colore al testo*/
+  background-color: var(--sfondo);/*prende variabile sfondo*/
+  background-image:
+    linear-gradient(rgba(25, 211, 162, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(25, 211, 162, 0.05) 1px, transparent 1px); /* per fare lo sfondo quadrettato*/
+  background-size: 32px 32px; /* altezza e grandezza dei quadratini*/
+}
+
+/* ---------- Stato ---------- */ 
+/* Lo stato del gioco, se il gioco è pronto o meno */
+.stato {
+  max-width: 560px; /*da larghezza massima all'elemento*/
+  margin: 40px auto 0;/*dato che l'elemento ha una grandezza massimo il dom divide due lo spazio mancante mettendo in mezzo agli spazi mancanti*/
+  padding: 10px 14px;
+  font-size: 9px;
+  text-align: left;
+  background: #040f12;
+  border-left: 4px solid #556;
+  border-radius: 4px;
+}
+
+.stato.caricamento { color: var(--giallo); border-color: var(--giallo); }
+.stato.ok          { color: var(--verde);  border-color: var(--verde); }
+.stato.errore      { color: var(--rosso);  border-color: var(--rosso); }
+
+.gioco-contenuto {
+  width: min(760px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0;
+  text-align: center;
+}
+
+.gioco-contenuto h1 {
+  color: var(--verde);
+  text-shadow: 0 0 12px var(--verde);
+}
+
+.istruzioni-gioco {
+  font-size: 10px;
+  color: #a9d8cf;
+}
+
+.gioco-tabellone {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 600px;
+  margin: 24px auto;
+  gap: 3px;
+  padding: 8px;
+  box-sizing: border-box;
+  background: #02090d;
+  border: 2px solid #1d5a58;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(34, 230, 255, 0.15);
+}
+
+.cella {
+  display: flex;
+  flex: 0 0 calc((100% - 42px) / 15);
+  aspect-ratio: 1;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background: #081619;
+  border-radius: 3px;
+}
+
+.cella.muro {
+  background: #123b70;
+  border: 1px solid #22e6ff;
+  box-shadow: inset 0 0 8px rgba(34, 230, 255, 0.3);
+}
+
+.cella.chip::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ffd84c;
+  box-shadow: 0 0 7px #ffd84c;
+}
+
+.cella.robot img {
+  display: block;
+  width: 90%;
+  height: 90%;
+}
+
+.torna-sito {
+  display: inline-block;
+  margin-top: 16px;
+  color: #22e6ff;
+  font-size: 10px;
+}

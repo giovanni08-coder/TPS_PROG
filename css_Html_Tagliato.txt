@@ -107,3 +107,74 @@ HTML
       </div>
     </div>
 
+--esempio gioco paraziale
+
+/* ---------- Pagina di gioco ---------- */
+
+css
+
+.gioco-pagina {
+  min-height: 100vh;
+}
+
+.gioco-contenuto {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 20px;
+  text-align: center;
+}
+
+.gioco-contenuto h1 {
+  color: var(--verde);
+  text-shadow: 0 0 12px var(--verde);
+}
+
+.gioco-tabellone {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(28px, 44px));
+  justify-content: center;
+  gap: 4px;
+  margin: 28px auto;
+}
+
+.cella {
+  display: grid;
+  aspect-ratio: 1;
+  place-items: center;
+  background: #0a1c20;
+  border: 1px solid #1d5a58;
+  border-radius: 4px;
+}
+
+.cella.chip::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: var(--giallo);
+  box-shadow: 0 0 10px var(--giallo);
+  transform: rotate(45deg);
+}
+
+.cella.robot img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+}
+
+.istruzioni-gioco {
+  font-size: 10px;
+  color: #a9d8cf;
+}
+
+.torna-sito {
+  display: inline-block;
+  margin-top: 20px;
+  color: var(--ciano);
+  font-size: 10px;
+}
+
+@media (max-width: 480px) {
+  .gioco-tabellone {
+    gap: 2px;
+  }
+}
