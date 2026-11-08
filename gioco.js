@@ -1,6 +1,11 @@
 
-const TornaAlSito = document.querySelectorAll(".btn");
+const TornaAlSito = document.querySelector("#torna-sito");
 const board = document.getElementById("tabellone");
+const Gioca = document.querySelector("#gioca");
+const statoSito = document.querySelector("#stato-gioco");
+statoSito.textContent = "Caricamento del gioco in corso...";
+statoSito.classList.add("caricamento");
+
 
 const map = [
   "###############", 
@@ -86,7 +91,10 @@ function SpawnaMonete() {
       // Se non è un muro (#), consideriamo la cella potenzialmente vuota
       if (map[r][c] !== "#") {
         // Controlliamo che non ci sia il giocatore
-        let occupata = (player[0] === c && player[1] === r);
+        let occupata = false;
+        if (player[0] === c && player[1] === r) {
+          occupata = true;
+        }
         
         // Controlliamo che non ci sia un mostro
         for (let i = 0; i < mostri.length; i++) {
@@ -106,9 +114,8 @@ function SpawnaMonete() {
 
   // 2. Ora peschiamo in sicurezza le 40 monete
   MoneteRimanenti = 0; // Reset contatore
-  const quanteMonete = Math.min(40, celleVuote.length); // Sicurezza se le celle libere sono meno di 40
 
-  for (let i = 0; i < quanteMonete; i++) {
+  for (let i = 0; i < 40; i++) {
     const indiceAcaso = Math.floor(Math.random() * celleVuote.length);
     const coordinata = celleVuote.splice(indiceAcaso, 1)[0];
     
@@ -126,8 +133,11 @@ function SpawnaMonete() {
 SpawnaMonete();
 
 
-
-//Movimento del giocatore
+Gioca.addEventListener("click", () => {
+  document.querySelector("#gioca").disabled = true;
+  statoSito.textContent = "Gioco in corso...";
+  statoSito.classList.remove("caricamento");
+  statoSito.classList.add("ok");
 function muoviGiocatore(x, y) {
   const nuovaX = player[0] + x;
   const nuovaY = player[1] + y;
@@ -281,7 +291,6 @@ function muoviVirus() {
           cellaGiocatore[0].removeChild(imgRobot);
         }
       }
-
       alert("Game Over! Un mostro ti ha preso!");
       location.reload();
     }
@@ -290,12 +299,11 @@ function muoviVirus() {
 
 setInterval(muoviVirus, 500);//muove i mostri ogni 500 millisecondi, esegue la funzione muoviVirus ogni 500 millisecondi
 
+});
 
-TornaAlSito.forEach((btn) => {
-  btn.addEventListener("click", () => {
+TornaAlSito.addEventListener("click", () => {
     window.location.href = "schermata_iniziale.html";
     statoSito.textContent = "Caricamento del gioco in corso...";
     statoSito.classList.add("caricamento");
   });
-});
 document.body.style.userSelect = "none";//non permette di selezionare il testo della pagina
