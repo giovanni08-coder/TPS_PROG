@@ -56,12 +56,11 @@ body {
 }
 
 .gioco-tabellone {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(15, 1fr); /* Crea 15 colonne uguali */
+  gap: 3px;
   max-width: 600px;
   margin: 24px auto;
-  gap: 3px;
   padding: 8px;
   box-sizing: border-box;
   background: #02090d;
@@ -71,40 +70,44 @@ body {
 }
 
 .cella {
-  display: flex;
-  flex: 0 0 calc((100% - 42px) / 15);
-  aspect-ratio: 1;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
+  aspect-ratio: 1;/* Mantiene la proporzione quadrata */
   background: #081619;
   border-radius: 3px;
 }
 
-.cella.muro {
-  background: #123b70;
-  border: 1px solid #22e6ff;
-  box-shadow: inset 0 0 8px rgba(34, 230, 255, 0.3);
-}
-
-.cella.chip::after {
-  content: "";
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #ffd84c;
-  box-shadow: 0 0 7px #ffd84c;
-}
-
-.cella.robot img {
+.cella img {
   display: block;
   width: 90%;
   height: 90%;
 }
 
-.torna-sito {
-  display: inline-block;
-  margin-top: 16px;
-  color: #22e6ff;
-  font-size: 10px;
+
+/* ---------- torna-sito btn ---------- */ 
+.btn {
+  padding: 18px 28px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #04120c;
+  background: var(--verde);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #0f8a69, 0 0 14px rgba(25, 211, 162, 0.5);/*da l'ombra ai pulsanti*/
+  transition: transform 0.4s, box-shadow 1s;/*sfuma la transizione, la rende più bella ed elegante*/
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}/*quando vi sopra con il mouse si sposta in alto*/
+
+.btn:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #0f8a69;
+}/* il pulsante premuto e non è disabilitato si sposta in basso*/
+
+.btn:disabled {
+  color: #556;
+  background: #1c2b30;
+  box-shadow: 0 0  #101a1d;
+  cursor: wait;/*fa apparire il cursore in caricamento*/
 }
