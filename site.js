@@ -56,5 +56,5 @@ document.addEventListener("keydown", (e) => {
       statoSito.classList.add("caricamento");
   }
 });
-
+document.body.style.userSelect = "none";//non permette di selezionare il testo della pagina
 

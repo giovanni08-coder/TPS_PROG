@@ -3,6 +3,9 @@ const TornaAlSito = document.querySelector("#torna-sito");
 const board = document.getElementById("tabellone");
 const Gioca = document.querySelector("#gioca");
 const statoSito = document.querySelector("#stato-gioco");
+const Facile = document.getElementById("facile");
+const Medio = document.getElementById("medio");
+const Difficile = document.getElementById("difficile");
 statoSito.textContent = "Caricamento del gioco in corso...";
 statoSito.classList.add("caricamento");
 console.log(localStorage.getItem("classifica"));
@@ -32,11 +35,15 @@ const mostri = [
 ];
 
 const player = [ 1, 1]; // Coordinate iniziali del giocatore (x, y)];
+document.querySelector(".info-box").value = "";
 let MoneteRimanenti = 0;
 let punteggio =0;
 const punteggioElemento = document.getElementById("punteggio");
 const celleVuote = [];
 const grigliaDiv = [];
+let difFacile = false;
+let difMedio = false;
+let difDifficile = false;
 
 function trovaCella(x, y) {
   for (let i = 0; i < grigliaDiv.length; i++) {
@@ -148,8 +155,31 @@ async function salvaPunteggio(nome, punteggio) {
         JSON.stringify(classifica)
     );
 }
+Facile.addEventListener("click", () => {
+    difFacile = true;
+    difMedio= false;
+    difDifficile = false;
+});
+
+Medio.addEventListener("click", () => {
+    difMedio= true;
+    difFacile=false;
+    difDifficile=false;
+});
+
+Difficile.addEventListener("click", () => {
+    difDifficile = true;
+    difMedio =false;
+    difFacile=false;
+});
+
 
 Gioca.addEventListener("click", () => {
+  if(difFacile===false && difMedio===false && difDifficile===false){
+    alert("Per favore scegli la modalità se no il gioco non si avvia");
+    return;
+  }
+
   if (document.querySelector(".info-box").value.trim() === "") {
     alert("Per favore, inserisci il tuo nikname prima di giocare.");
     return;
@@ -319,8 +349,15 @@ async function muoviVirus() {
     }
   }
 }
-
-setInterval(muoviVirus, 500);//muove i mostri ogni 500 millisecondi, esegue la funzione muoviVirus ogni 500 millisecondi
+if(difFacile===true){
+  setInterval(muoviVirus, 500);//muove i mostri ogni 500 millisecondi, esegue la funzione muoviVirus ogni 500 millisecondi
+}
+if(difMedio===true){
+  setInterval(muoviVirus, 300);//muove i mostri ogni 500 millisecondi, esegue la funzione muoviVirus ogni 500 millisecondi
+}
+if(difDifficile===true){
+  setInterval(muoviVirus, 150);//muove i mostri ogni 500 millisecondi, esegue la funzione muoviVirus ogni 500 millisecondi
+}
 
 });
 

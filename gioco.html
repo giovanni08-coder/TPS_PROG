@@ -9,15 +9,19 @@
 <body class="gioco-pagina">
   <main class="gioco-contenuto">
     <h1>CIRCUIT CHASE</h1>
-    <p>Raccogli tutti i chip senza farti catturare dai virus</p>
+    <p class="sottotitolo">Raccogli tutti i chip senza farti catturare dai virus</p>
     <p class="istruzioni-gioco">Muovi con le frecce o W A S D. Premi P per mettere in pausa o riprendere.</p>
     <label for="nome-giocatore">Inserisci il tuo nikname:</label>
     <input type="text" class="info-box">
+    <p><strong>Scegli la difficoltà con cui vuoi giocare: </strong></p>
+    <div class="modalita"><button class="btn difficolta" id="facile">Facile</button>
+      <button class="btn difficolta" id="medio">Medio</button>
+      <button class="btn difficolta" id="difficile">Difficile</button></div>
     <p>Punteggio: <strong id="punteggio">0</strong></p>
     <div id="tabellone" class="gioco-tabellone"></div>
     <button class="btn" id="gioca">Gioca</button>
     <p id="stato-gioco" class="stato">Caricamento del gioco...</p>
-    <button class="btn" id="torna-sito">&#8592; Torna al sito</button>
+    <button class="btn torna-sito" id="torna-sito">&#8592; Torna al sito</button>
   </main>
   <script src="gioco.js"></script>
 </body>

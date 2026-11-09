@@ -20,14 +20,19 @@ body {
     linear-gradient(90deg, rgba(25, 211, 162, 0.05) 1px, transparent 1px); /* per fare lo sfondo quadrettato*/
   background-size: 32px 32px; /* altezza e grandezza dei quadratini*/
 }
-
+.sottotitolo {
+  margin: 26px auto 30px;
+  font-size: 14px;
+  color: #a9d8cf;
+  
+}
 /* ---------- Stato ---------- */ 
 /* Lo stato del gioco, se il gioco è pronto o meno */
 .stato {
   max-width: 560px; /*da larghezza massima all'elemento*/
   margin: 40px auto 0;/*dato che l'elemento ha una grandezza massimo il dom divide due lo spazio mancante mettendo in mezzo agli spazi mancanti*/
   padding: 10px 14px;
-  font-size: 9px;
+  font-size: 13px;
   text-align: left;
   background: #040f12;
   border-left: 4px solid #556;
@@ -51,7 +56,7 @@ body {
 }
 
 .istruzioni-gioco {
-  font-size: 10px;
+  font-size: 14px;
   color: #a9d8cf;
 }
 
@@ -82,7 +87,7 @@ body {
 }
 
 
-/* ---------- torna-sito btn ---------- */ 
+/* ---------- torna-sito gioca modalità btn e textbox ---------- */ 
 .btn {
   padding: 18px 28px;
   font-size: 14px;
@@ -94,6 +99,9 @@ body {
   cursor: pointer;
   box-shadow: 0 4px 0 #0f8a69, 0 0 14px rgba(25, 211, 162, 0.5);/*da l'ombra ai pulsanti*/
   transition: transform 0.4s, box-shadow 1s;/*sfuma la transizione, la rende più bella ed elegante*/
+}
+.btn.torna-sito {
+  margin-top: 20px;
 }
 
 .btn:hover:not(:disabled) {
@@ -110,6 +118,21 @@ body {
   background: #1c2b30;
   box-shadow: 0 0  #101a1d;
   cursor: wait;/*fa apparire il cursore in caricamento*/
+}
+.modalita{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  border: 2px solid #1d5a58;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(34, 230, 255, 0.15);
+  padding: 20px 20px 20px;
+  max-width: 400px; 
+  margin: 20px auto 20px;
+  background: --var("pannello");
+}
+.btn.difficolta{
+  width: 130px;
 }
 
 .info-box {
