@@ -190,6 +190,7 @@ Gioca.addEventListener("click", () => {
   document.querySelector("#medio").disabled = true;
   document.querySelector("#difficile").disabled = true;
   document.querySelector(".info-box").disabled = true;
+  document.querySelector(".torna-sito").disabled = true;
   statoSito.textContent = "Gioco in corso...";
   statoSito.classList.remove("caricamento");
   statoSito.classList.add("ok");
