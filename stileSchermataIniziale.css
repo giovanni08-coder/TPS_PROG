@@ -60,7 +60,7 @@ body {
 /* ---------- Bottoni ---------- */
 .btn {
   padding: 12px 18px;
-  font-family: inherit;
+  font-family: inherit;/*prende il testo dell'elemento genitore (body)*/
   font-size: 13px;
   color: #04120c;
   background: var(--verde);
@@ -98,15 +98,10 @@ body {
   text-align: center;
 }
 
-.sopratitolo {
-  margin: 0 0 18px;
-  font-size: 13px;
-  color: var(--ciano);
-}
 
 #hero h1 {
   margin: 0;
-  font-size: clamp(32px, 320px,73px);/* clamp serve per dare font massimo, minimo e preferito*/
+  font-size: clamp(32px, 8vw,73px);/* clamp serve per dare font massimo, minimo e preferito, 8vw è l'8% della pagina*/
   line-height: 1.2;
   letter-spacing: 6px;
   color: var(--verde);
@@ -114,7 +109,7 @@ body {
 }
 
 .sottotitolo {
-  margin: 26px auto 30px;
+  margin: 26px auto 30px;/* auto centra l'elemento  */
   font-size: 14px;
   color: #a9d8cf;
 }
@@ -227,10 +222,6 @@ kbd {
   max-height: 120px;
 }
 
-.virus-card.attivo {
-  border-color: var(--giallo);
-  box-shadow: 0 0 20px rgba(255, 216, 76, 0.35);
-}
 .virus-card .rosso img{
     max-width: 100px;
 }
@@ -255,17 +246,6 @@ kbd {
 }
 .virus-card .verde h3{
     color:var(--verde);
-}
-
-.info-box {
-  margin: 22px 0 0;
-  padding: 16px;
-  min-height: 70px;
-  font-size: 13px;
-  color: var(--testo);
-  background: #0a1c20;
-  border: 2px dashed #2b6a68;
-  border-radius: 8px;
 }
 
 /* ---------- Classifica ---------- */

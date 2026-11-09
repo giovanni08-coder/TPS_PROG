@@ -44,6 +44,8 @@ const grigliaDiv = [];
 let difFacile = false;
 let difMedio = false;
 let difDifficile = false;
+let isGameOver = false; // Serve a bloccare i salvataggi multipli
+let difficolta = "";
 
 function trovaCella(x, y) {
   for (let i = 0; i < grigliaDiv.length; i++) {
@@ -91,7 +93,6 @@ for (let righe = 0; righe < map.length; righe++) {
   }
 }
 function SpawnaMonete() {
-  // 1. Ripopoliamo l'array celleVuote scansionando tutta la mappa
   celleVuote.length = 0; // Svuotiamo l'array esistente
 
   for (let r = 0; r < map.length; r++) {
@@ -120,7 +121,6 @@ function SpawnaMonete() {
     }
   }
 
-  // 2. Ora peschiamo in sicurezza le 40 monete
   MoneteRimanenti = 0; // Reset contatore
 
   for (let i = 0; i < 40; i++) {
@@ -140,14 +140,15 @@ function SpawnaMonete() {
 }
 SpawnaMonete();
 
-async function salvaPunteggio(nome, punteggio) {
+async function salvaPunteggio(nome,punteggio,difficolta) {
     let classifica = JSON.parse(
         localStorage.getItem("classifica")
     ) || [];
 
     classifica.push({
         nome,
-        punteggio
+        punteggio,
+        difficolta
     });
 
     localStorage.setItem(
@@ -159,18 +160,21 @@ Facile.addEventListener("click", () => {
     difFacile = true;
     difMedio= false;
     difDifficile = false;
+    difficolta="facile";
 });
 
 Medio.addEventListener("click", () => {
     difMedio= true;
     difFacile=false;
     difDifficile=false;
+    difficolta = "media";
 });
 
 Difficile.addEventListener("click", () => {
     difDifficile = true;
     difMedio =false;
     difFacile=false;
+    difficolta = "difficile";
 });
 
 
@@ -219,11 +223,14 @@ async function muoviGiocatore(x, y) {
     const cellaNuova = trovaCella(player[0], player[1]);
 
     if (colpitoMostro) {
-      await salvaPunteggio(nomeGiocatore, punteggio);
-      alert("Game Over! Un mostro ti ha preso!");
-      location.reload();
-      return;
+    if (!isGameOver) {
+        isGameOver = true;
+        await salvaPunteggio(nomeGiocatore, punteggio, difficolta);
+        alert("Game Over! Un mostro ti ha preso!");
+        location.reload();
     }
+    return;
+}
 
     const imgCoin = cellaNuova[0].querySelector("img");
     if (imgCoin !== null && imgCoin.src.includes("coin.png")) {
@@ -232,6 +239,9 @@ async function muoviGiocatore(x, y) {
       punteggioElemento.textContent = punteggio;
       MoneteRimanenti -= 1;
       
+      
+      //non serve ma per sicurezza controllo lo stesso che la cella che sto abbandonando non sia già nelle celle vuote prima 
+      //di inserire la cella vuota all'interno delle celle vuote
       const coordinataAttuale = [player[1], player[0]];
       let giaPresente = false;
       for (let k = 0; k < celleVuote.length; k++) {
@@ -348,9 +358,13 @@ async function muoviVirus() {
           cellaGiocatore[0].removeChild(imgRobot);
         }
       }
-      await salvaPunteggio(nomeGiocatore, punteggio);
-      alert("Game Over! Un mostro ti ha preso!");
-      location.reload();
+      if (!isGameOver) {
+        isGameOver = true;
+        await salvaPunteggio(nomeGiocatore, punteggio, difficolta);
+        alert("Game Over! Un mostro ti ha preso!");
+        location.reload();
+    }
+    return;
     }
   }
 }

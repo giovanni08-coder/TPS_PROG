@@ -3,14 +3,22 @@ const statoSito =  document.getElementById("stato-sito");//paragrafi stato sito
 const statoClassifica = document.getElementById("top-lista");//paragrafi stato classifica
 
 async function mostraClassifica() {
+  const pesiDifficolta = {
+    "facile": 1,
+    "media": 2,
+    "difficile": 3
+};
+
     const classifica = JSON.parse(
         localStorage.getItem("classifica")
     ) || [];
 
-    classifica.sort(
-        (a, b) => b.punteggio - a.punteggio
-    );
-
+    classifica.sort((a, b) => {
+    if (b.punteggio !== a.punteggio) {
+        return b.punteggio - a.punteggio;
+    }
+    return pesiDifficolta[b.difficolta] - pesiDifficolta[a.difficolta];
+});
     const topLista = document.getElementById("top-lista");
 
     topLista.innerHTML = "";
@@ -19,7 +27,7 @@ async function mostraClassifica() {
         const li = document.createElement("li");
 
         li.textContent =
-            `${classifica[i].nome} - ${classifica[i].punteggio} punti`;
+            `${classifica[i].nome} - ${classifica[i].punteggio} punti - difficolta ${classifica[i].difficolta}`  ;
 
         topLista.appendChild(li);
     }
@@ -57,4 +65,3 @@ document.addEventListener("keydown", (e) => {
   }
 });
 document.body.style.userSelect = "none";//non permette di selezionare il testo della pagina
-
