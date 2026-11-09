@@ -186,6 +186,10 @@ Gioca.addEventListener("click", () => {
   }
   const nomeGiocatore = document.querySelector(".info-box").value.trim();
   document.querySelector("#gioca").disabled = true;
+  document.querySelector("#facile").disabled = true;
+  document.querySelector("#medio").disabled = true;
+  document.querySelector("#difficile").disabled = true;
+  document.querySelector(".info-box").disabled = true;
   statoSito.textContent = "Gioco in corso...";
   statoSito.classList.remove("caricamento");
   statoSito.classList.add("ok");

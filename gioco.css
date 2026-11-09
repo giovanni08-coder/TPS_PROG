@@ -24,7 +24,7 @@ body {
   margin: 26px auto 30px;
   font-size: 14px;
   color: #a9d8cf;
-  
+
 }
 /* ---------- Stato ---------- */ 
 /* Lo stato del gioco, se il gioco è pronto o meno */
@@ -32,7 +32,7 @@ body {
   max-width: 560px; /*da larghezza massima all'elemento*/
   margin: 40px auto 0;/*dato che l'elemento ha una grandezza massimo il dom divide due lo spazio mancante mettendo in mezzo agli spazi mancanti*/
   padding: 10px 14px;
-  font-size: 13px;
+  font-size: 14px;
   text-align: left;
   background: #040f12;
   border-left: 4px solid #556;
